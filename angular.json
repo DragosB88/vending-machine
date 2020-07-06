@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "vending-machine"
+    }
+  },
+  "defaultProject": "vending-machine",
+  "cli": {
+    "analytics": "a196ad18-0de5-4e3e-b866-e26c566bf17b"
+  }
 }
