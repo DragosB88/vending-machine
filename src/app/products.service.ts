@@ -57,7 +57,7 @@ export class ProductsService {
     },
     {
       name: 'Granola Bars',
-      alias: 'Bars',
+      alias: 'Granola',
       prodClass: 'prod-bars',
       id: 6,
       qty: 14,
