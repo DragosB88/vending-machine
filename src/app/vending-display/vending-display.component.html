@@ -1,4 +1,28 @@
-<p>vending-display works!</p>
-<div *ngFor="let product of products">
-  <div>{{ product.name }}</div>
+<div class="hallway">
+  <div class="vending-large-container">
+    <div class="vending-machine">
+      <div
+        class="vending-item-container"
+        *ngFor="let item of vendingSlots; index as i"
+      >
+        <div
+          class="vending-item-container__item default-item-class"
+          [ngClass]="item.prodClass"
+        >
+          <span class="vending-item-container__item--rotate">{{
+            item.alias
+          }}</span>
+          <!-- <span class="container__item--qty">{{ item.qty }}</span> -->
+          <span class="vending-item-container__code"
+            >Id {{ i }} | {{ item.price }} Ron</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="product-code-slot">
+      <div class="product-code-slot__screen">ERR</div>
+      &#9783;&#9783;&#9783;
+    </div>
+    <div class="outlet"></div>
+  </div>
 </div>

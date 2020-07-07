@@ -1,0 +1,255 @@
+@import "https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap";
+
+//font
+$font-delius: "Delius Swash Caps", cursive;
+$font-roboto: "Roboto", sans-serif;
+// product colors
+$black-prod: #181419;
+$purple-prod: #4a073c;
+$red-prod: #9e0b41;
+$deep-orange-prod: #cc3e18;
+$light-orange-prod: #f0971c;
+$pepsi-blue: #005cb4;
+$dew-green: #94c93d;
+$aqua-blue: #9cd3db;
+// device colors
+$base-white: #fff;
+$light-white: #ece1c3;
+$base-blue-gray: #063940;
+// default values
+$default-radius: 20px;
+@mixin can {
+  font-weight: bold;
+  width: 48px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  border-radius: 5px;
+  &:after {
+    position: absolute;
+    content: "";
+    right: 3px;
+    bottom: 3px;
+    width: calc(100% - 6px);
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+  }
+}
+@mixin bottle {
+  font-weight: bold;
+  line-height: 30px;
+  font-size: 12px;
+  border-radius: 5px;
+  &:after {
+    position: absolute;
+    content: "";
+    right: 3px;
+    bottom: 3px;
+    width: calc(100% - 6px);
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+  }
+}
+
+@mixin bar {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.hallway {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
+
+.vending-large-container {
+  position: relative;
+  padding: 30px 150px 150px 30px;
+  background: $base-blue-gray;
+  border-radius: $default-radius;
+}
+.vending-machine {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  grid-template-rows: repeat(5, 120px);
+  background: $light-white;
+  border-radius: $default-radius;
+  align-items: baseline;
+}
+.product-code-slot {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #181419;
+  position: absolute;
+  right: 30px;
+  border-radius: 10px;
+  background: $light-white;
+  top: 30%;
+  &__screen {
+    background: $pepsi-blue;
+    color: $base-white;
+    width: 100%;
+    height: 26px;
+    font-family: $font-roboto;
+    line-height: 26px;
+  }
+}
+.outlet {
+  width: 280px;
+  height: 74px;
+  background: $black-prod;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 32px;
+}
+.vending-item-container {
+  position: relative;
+  height: 100%;
+  border-bottom: 20px solid $base-blue-gray;
+  &__item {
+    display: block;
+    height: 100%;
+    position: relative;
+    &--rotate {
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 30px;
+      transform: rotate(-90deg);
+      font-family: $font-delius;
+      text-align: center;
+      margin: auto;
+    }
+    &.default-item-class {
+      & span:first-child {
+        font-size: 14px;
+        background: $aqua-blue;
+        color: $base-blue-gray;
+        font-weight: bold;
+      }
+    }
+    &.prod-snickers {
+      & span:first-child {
+        @include bar;
+        font-size: 14px;
+        background: $black-prod;
+        color: $red-prod;
+      }
+    }
+    &.prod-twix {
+      & span:first-child {
+        @include bar;
+        font-size: 14px;
+        background: $light-orange-prod;
+        color: $red-prod;
+        line-height: 24px;
+      }
+    }
+    &.prod-milky {
+      & span:first-child {
+        @include bar;
+        font-size: 12px;
+        background: $pepsi-blue;
+        color: $base-white;
+        line-height: 16px;
+        width: 46px;
+      }
+    }
+    &.prod-oreo {
+      & span:first-child {
+        @include bar;
+        font-size: 12px;
+        background: $pepsi-blue;
+        color: $base-white;
+        line-height: 20px;
+      }
+    }
+
+    &.prod-rice-treats {
+      & span:first-child {
+        @include bar;
+        font-size: 12px;
+        background: $base-white;
+        color: $black-prod;
+        height: 20px;
+        line-height: 20px;
+      }
+    }
+
+    &.prod-corn-nuts {
+      & span:first-child {
+        font-size: 18px;
+        background: $light-orange-prod;
+        color: $black-prod;
+        font-weight: bold;
+        line-height: 48px;
+      }
+    }
+
+    &.prod-bars {
+      & span:first-child {
+        @include bar;
+        font-size: 18px;
+        background: $red-prod;
+        color: $black-prod;
+      }
+    }
+
+    &.prod-aqua {
+      & span:first-child {
+        @include bottle;
+        background: $aqua-blue;
+        color: $pepsi-blue;
+      }
+    }
+
+    &.prod-mountain-dew {
+      & span:first-child {
+        @include can;
+        background: $dew-green;
+        color: $red-prod;
+      }
+    }
+
+    &.prod-pepsi {
+      & span:first-child {
+        @include can;
+        background: $pepsi-blue;
+        color: $base-white;
+      }
+    }
+
+    &.prod-coke {
+      & span:first-child {
+        @include can;
+        background: $red-prod;
+        color: $base-white;
+      }
+    }
+    &.prod-fanta {
+      & span:first-child {
+        @include can;
+        background: $light-orange-prod;
+        color: $pepsi-blue;
+      }
+    }
+  }
+  // end product styling
+
+  &__code {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    color: $base-white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 300;
+    font-family: $font-roboto;
+    line-height: 20px;
+  }
+}
