@@ -26,15 +26,19 @@ export class VendingDisplayComponent implements OnInit {
     }
 
     // make sure that the number of items displayed is not bigger than the available vending machine slots
-    if (this.vendingSlots.length >= 20) {
+    this.checkNumberOfItems(this.vendingSlots);
+    console.log('final array ', this.vendingSlots);
+  }
+
+  checkNumberOfItems(items) {
+    if (items.length >= 20) {
       console.log('Vending machine display limit exceeded');
-      this.vendingSlots.splice(20);
-    } else if (this.vendingSlots.length === 20) {
+      items.splice(20);
+    } else if (items.length === 20) {
       console.log('Vending machine display has reached its limit');
     } else {
       console.log('Vending machine display still has available item slots');
     }
-    console.log('final array ', this.vendingSlots);
   }
 
   ngOnInit(): void {}

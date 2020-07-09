@@ -1,0 +1,41 @@
+// base styling for product categories
+@mixin can {
+  font-weight: bold;
+  width: 48px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  border-radius: 5px;
+  bottom: 14px;
+  &:after {
+    position: absolute;
+    content: "";
+    right: 3px;
+    bottom: 3px;
+    width: calc(100% - 6px);
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+  }
+}
+@mixin bottle {
+  font-weight: bold;
+  line-height: 30px;
+  font-size: 12px;
+  border-radius: 5px;
+  bottom: 26px;
+  &:after {
+    position: absolute;
+    content: "";
+    right: 3px;
+    bottom: 3px;
+    width: calc(100% - 6px);
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3px;
+  }
+}
+@mixin bar {
+  font-weight: bold;
+  font-size: 12px;
+}

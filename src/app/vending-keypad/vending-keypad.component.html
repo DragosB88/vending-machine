@@ -1,0 +1,16 @@
+<div class="vending-keypad-container">
+  <div class="pad-row">
+    <div class="pad-row__display-box">
+      <input class="pad-screen order-screen" readonly [value]="result" />
+    </div>
+  </div>
+  <div class="pad-row buttons-container">
+    <button
+      class="pad-row__button"
+      *ngFor="let button of buttons"
+      (click)="evaluate(button)"
+    >
+      {{ button }}
+    </button>
+  </div>
+</div>

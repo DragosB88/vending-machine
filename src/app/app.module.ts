@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VendingDisplayComponent } from './vending-display/vending-display.component';
+import { VendingKeypadComponent } from './vending-keypad/vending-keypad.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VendingDisplayComponent
+    VendingDisplayComponent,
+    VendingKeypadComponent
   ],
   imports: [
     BrowserModule,

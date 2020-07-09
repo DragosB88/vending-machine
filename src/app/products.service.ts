@@ -29,7 +29,7 @@ export class ProductsService {
       prodClass: 'prod-milky',
       id: 2,
       qty: 20,
-      price: 1.5,
+      price: 2,
     },
     {
       name: 'Oreos',

@@ -1,0 +1,28 @@
+@import "https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap";
+@import "https://fonts.googleapis.com/css2?family=VT323&display=swap";
+//font
+$font-delius: "Delius Swash Caps", cursive;
+$font-roboto: "Roboto", sans-serif;
+$font-electronic: "VT323", monospace;
+// product colors
+$black-prod: #181419;
+$purple-prod: #4a073c;
+$red-prod: #9e0b41;
+$deep-orange-prod: #cc3e18;
+$light-orange-prod: #f0971c;
+$pepsi-blue: #005cb4;
+$dew-green: #94c93d;
+$aqua-blue: #9cd3db;
+// device colors
+$base-white: #fff;
+$light-white: #ece1c3;
+$base-blue-gray: #063940;
+// default values
+$default-radius: 20px;
+
+// screen pad elements
+$screen-blue: #0000ff;
+$btn-grey-default: #d8d9db;
+$btn-grey-hover: #ebebeb;
+$btn-grey-active: #bbbcbe;

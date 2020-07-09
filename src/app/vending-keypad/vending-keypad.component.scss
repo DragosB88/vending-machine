@@ -1,0 +1,59 @@
+@import "../app.component.scss";
+
+.vending-keypad-container {
+  border: 1px solid $black-prod;
+  width: 400px;
+  background: $black-prod;
+  color: $base-white;
+  .pad-screen {
+    font-size: 32px;
+    font-family: $font-electronic;
+    text-align: right;
+    padding: 20px 5px;
+    width: 100%;
+    box-sizing: border-box;
+    // reset input styling
+    background: transparent;
+    color: $base-white;
+    border: 0;
+  }
+
+  .pad-row {
+    &__display-box {
+      position: relative;
+
+      input {
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    &__button {
+      background: $btn-grey-default;
+      color: $black-prod;
+      height: 100px;
+      width: 33.3%;
+      border: none;
+      border-radius: 0;
+      font-size: 20px;
+      border: 1px solid $black-prod;
+      cursor: pointer;
+      // states
+      &:hover {
+        background: $btn-grey-hover;
+      }
+      &:active {
+        background: $btn-grey-active;
+      }
+      &:focus {
+      }
+      // selectors for large btns
+      &:first-child {
+        width: 66.6%;
+      }
+      &:nth-last-child(2) {
+        width: 66.6%;
+      }
+    }
+  }
+}
