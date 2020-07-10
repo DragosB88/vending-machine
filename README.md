@@ -1,6 +1,7 @@
 # VendingMachine
 
 The project uses a mockup instead of a database (for now)
+
 It doesn't use Redux (for now)
 
 Steps for setting it up:
