@@ -14,19 +14,37 @@
           }}</span>
           <!-- <span class="container__item--qty">{{ item.qty }}</span> -->
           <label class="vending-item-container__code"
-            >Id {{ i + 10 }} | {{ item.price }} Ron</label
-          >
+            >Id {{ i + 10 }} | $ {{ item.price }}
+          </label>
         </div>
       </div>
     </div>
-    <div class="product-code-slot">
-      <div class="product-code-slot__screen">{{ displayedCode }}</div>
+    <div class="product-code-slot" (click)="toggleScreens(false)">
+      <div class="product-code-slot-container">
+        <div class="product-code-slot__screen-order" [class.blink]="!showPanel">
+          <span>Id</span>{{ displayedCode }}
+        </div>
+      </div>
+      &#9783;&#9783;&#9783;
+    </div>
+    <div class="product-credit-slot" (click)="toggleScreens(true)">
+      <div class="product-code-slot-container">
+        <div
+          class="product-credit-slot__screen-credit"
+          [class.blink]="!showPanel"
+        >
+          <span>$</span>{{ creditVal }}
+        </div>
+      </div>
       &#9783;&#9783;&#9783;
     </div>
     <div class="outlet"></div>
   </div>
   <vending-keypad
+    *ngIf="showPanel"
+    [topUp]="addMoney"
     (changeQuantity)="receiveQChange($event)"
     (updateCode)="receiveCode($event)"
+    (updateCredit)="updatedCredit($event)"
   ></vending-keypad>
 </div>

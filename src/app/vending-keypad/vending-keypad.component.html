@@ -1,11 +1,18 @@
 <div class="vending-keypad-container">
   <div class="pad-row">
     <div class="pad-row__display-box">
+      <label *ngIf="!topUp" class="action-selection"
+        >Please select the desired product</label
+      >
+      <label *ngIf="topUp" class="action-selection">Add credit</label>
       <label class="invalid-code blink" *ngIf="!isCodeValid">{{
         invalidText
       }}</label>
+      <label class="invalid-credit blink" *ngIf="!isCreditValid">{{
+        invalidText
+      }}</label>
       <input
-        [style.visibility]="isCodeValid ? 'visible' : 'hidden'"
+        [style.visibility]="showData ? 'visible' : 'hidden'"
         class="pad-screen order-screen"
         readonly
         type="number"
