@@ -1,0 +1,221 @@
+@import "../app.component.scss";
+
+.hallway {
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100vh;
+  justify-content: space-evenly;
+  background: gray;
+}
+
+.vending-large-container {
+  position: relative;
+  padding: 50px 130px 150px 50px;
+  background: $base-blue-gray;
+  border-radius: $default-radius;
+}
+
+.vending-machine {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  grid-template-rows: repeat(5, 120px);
+  background: $light-white;
+  border-radius: $default-radius;
+  align-items: baseline;
+}
+.product-code-slot {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #181419;
+  position: absolute;
+  right: 30px;
+  border-radius: 10px;
+  background: $light-white;
+  top: 30%;
+  &__screen {
+    background: $screen-blue;
+    color: $base-white;
+    width: 100%;
+    height: 26px;
+    font-family: $font-roboto;
+    line-height: 26px;
+    text-align: right;
+  }
+}
+.outlet {
+  width: 280px;
+  height: 74px;
+  background: $black-prod;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 32px;
+}
+.vending-item-container {
+  position: relative;
+  height: 100%;
+  border-bottom: 20px solid $base-blue-gray;
+  &__item {
+    display: block;
+    height: 100%;
+    position: relative;
+    &--rotate {
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 30px;
+      transform: rotate(-90deg);
+      font-family: $font-delius;
+      text-align: center;
+      margin: auto;
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+    }
+    &.default-item-class {
+      & span:first-child {
+        font-size: 14px;
+        background: $aqua-blue;
+        color: $base-blue-gray;
+        font-weight: bold;
+      }
+    }
+    &.prod-snickers {
+      & span:first-child {
+        @include bar;
+        font-size: 14px;
+        background: $black-prod;
+        color: $red-prod;
+      }
+    }
+    &.prod-twix {
+      & span:first-child {
+        @include bar;
+        font-size: 14px;
+        background: $light-orange-prod;
+        color: $red-prod;
+        line-height: 24px;
+        bottom: 28px;
+      }
+    }
+    &.prod-milky {
+      & span:first-child {
+        @include bar;
+        font-size: 12px;
+        background: $pepsi-blue;
+        color: $base-white;
+        line-height: 16px;
+        width: 46px;
+        bottom: 22px;
+      }
+    }
+    &.prod-oreo {
+      & span:first-child {
+        @include bar;
+        font-size: 12px;
+        background: $pepsi-blue;
+        color: $base-white;
+        line-height: 20px;
+        bottom: 32px;
+      }
+    }
+
+    &.prod-rice-treats {
+      & span:first-child {
+        @include bar;
+        font-size: 12px;
+        background: $base-white;
+        color: $black-prod;
+        height: 20px;
+        line-height: 20px;
+        bottom: 33px;
+      }
+    }
+
+    &.prod-corn-nuts {
+      & span:first-child {
+        font-size: 18px;
+        background: $light-orange-prod;
+        color: $black-prod;
+        font-weight: bold;
+        line-height: 48px;
+        bottom: 18px;
+      }
+    }
+
+    &.prod-bars {
+      & span:first-child {
+        @include bar;
+        font-size: 14px;
+        bottom: 33px;
+        background: $red-prod;
+        color: $black-prod;
+      }
+    }
+
+    &.prod-aqua {
+      & span:first-child {
+        @include bottle;
+        background: $aqua-blue;
+        color: $pepsi-blue;
+      }
+    }
+
+    &.prod-mountain-dew {
+      & span:first-child {
+        @include can;
+        background: $dew-green;
+        color: $red-prod;
+      }
+    }
+
+    &.prod-pepsi {
+      & span:first-child {
+        @include can;
+        background: $pepsi-blue;
+        color: $base-white;
+      }
+    }
+
+    &.prod-coke {
+      & span:first-child {
+        @include can;
+        background: $red-prod;
+        color: $base-white;
+      }
+    }
+    &.prod-fanta {
+      & span:first-child {
+        @include can;
+        background: $light-orange-prod;
+        color: $pepsi-blue;
+      }
+    }
+  }
+  // end product styling
+
+  &__code {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    color: $base-white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 300;
+    font-family: $font-roboto;
+    line-height: 20px;
+  }
+}

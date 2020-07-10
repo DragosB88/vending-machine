@@ -1,0 +1,32 @@
+<div class="hallway">
+  <div class="vending-large-container">
+    <div class="vending-machine">
+      <div
+        class="vending-item-container"
+        *ngFor="let item of products; index as i"
+      >
+        <div
+          class="vending-item-container__item default-item-class"
+          [ngClass]="item.prodClass"
+        >
+          <span *ngIf="item.qty" class="vending-item-container__item--rotate">{{
+            item.alias
+          }}</span>
+          <!-- <span class="container__item--qty">{{ item.qty }}</span> -->
+          <label class="vending-item-container__code"
+            >Id {{ i + 10 }} | {{ item.price }} Ron</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="product-code-slot">
+      <div class="product-code-slot__screen">{{ displayedCode }}</div>
+      &#9783;&#9783;&#9783;
+    </div>
+    <div class="outlet"></div>
+  </div>
+  <vending-keypad
+    (changeQuantity)="receiveQChange($event)"
+    (updateCode)="receiveCode($event)"
+  ></vending-keypad>
+</div>

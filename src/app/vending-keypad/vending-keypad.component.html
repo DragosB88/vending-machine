@@ -1,0 +1,25 @@
+<div class="vending-keypad-container">
+  <div class="pad-row">
+    <div class="pad-row__display-box">
+      <label class="invalid-code blink" *ngIf="!isCodeValid">{{
+        invalidText
+      }}</label>
+      <input
+        [style.visibility]="isCodeValid ? 'visible' : 'hidden'"
+        class="pad-screen order-screen"
+        readonly
+        type="number"
+        [value]="result"
+      />
+    </div>
+  </div>
+  <div class="pad-row buttons-container">
+    <button
+      class="pad-row__button"
+      *ngFor="let button of buttons"
+      (click)="evaluate(button)"
+    >
+      {{ button }}
+    </button>
+  </div>
+</div>
