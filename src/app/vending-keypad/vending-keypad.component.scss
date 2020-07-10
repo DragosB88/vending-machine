@@ -5,7 +5,8 @@
   width: 400px;
   background: $black-prod;
   color: $base-white;
-  .pad-screen {
+  .pad-screen,
+  .invalid-code {
     font-size: 32px;
     font-family: $font-electronic;
     text-align: right;
@@ -16,6 +17,14 @@
     background: transparent;
     color: $base-white;
     border: 0;
+  }
+
+  .invalid-code {
+    display: block;
+    position: absolute;
+    background: $black-prod;
+    color: $red-prod;
+    line-height: 32px;
   }
 
   .pad-row {
@@ -55,5 +64,13 @@
         width: 66.6%;
       }
     }
+  }
+
+  // the hated blink
+  .blink {
+    -webkit-animation: blink 1s steps(1) infinite;
+    -moz-animation: blink 1s steps(1) infinite;
+    -o-animation: blink 1s steps(1) infinite;
+    animation: blink 1s steps(1) infinite;
   }
 }

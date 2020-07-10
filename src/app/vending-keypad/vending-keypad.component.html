@@ -1,7 +1,15 @@
 <div class="vending-keypad-container">
   <div class="pad-row">
     <div class="pad-row__display-box">
-      <input class="pad-screen order-screen" readonly [value]="result" />
+      <label class="invalid-code blink" *ngIf="!isCodeValid"
+        >Invalid code</label
+      >
+      <input
+        [style.visibility]="isCodeValid ? 'visible' : 'hidden'"
+        class="pad-screen order-screen"
+        readonly
+        [value]="result"
+      />
     </div>
   </div>
   <div class="pad-row buttons-container">

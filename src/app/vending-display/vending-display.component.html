@@ -3,7 +3,7 @@
     <div class="vending-machine">
       <div
         class="vending-item-container"
-        *ngFor="let item of vendingSlots; index as i"
+        *ngFor="let item of products; index as i"
       >
         <div
           class="vending-item-container__item default-item-class"
@@ -14,7 +14,7 @@
           }}</span>
           <!-- <span class="container__item--qty">{{ item.qty }}</span> -->
           <span class="vending-item-container__code"
-            >Id {{ i }} | {{ item.price }} Ron</span
+            >Id {{ i + 10 }} | {{ item.price }} Ron</span
           >
         </div>
       </div>
