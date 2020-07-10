@@ -1,6 +1,6 @@
 # VendingMachine
 
-The project uses a mockup instead of a database (for now)
+The Angular based project uses a mockup instead of a database (for now)
 
 It doesn't use Redux (for now)
 
