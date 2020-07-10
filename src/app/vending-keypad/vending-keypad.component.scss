@@ -6,7 +6,8 @@
   background: $black-prod;
   color: $base-white;
   .pad-screen,
-  .invalid-code {
+  .invalid-code,
+  .invalid-credit {
     font-size: 32px;
     font-family: $font-electronic;
     text-align: right;
@@ -19,7 +20,8 @@
     border: 0;
   }
 
-  .invalid-code {
+  .invalid-code,
+  .invalid-credit {
     display: block;
     position: absolute;
     background: $black-prod;
@@ -66,11 +68,12 @@
     }
   }
 
-  // the hated blink
-  .blink {
-    -webkit-animation: blink 1s steps(1) infinite;
-    -moz-animation: blink 1s steps(1) infinite;
-    -o-animation: blink 1s steps(1) infinite;
-    animation: blink 1s steps(1) infinite;
+  .action-selection {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    background: $base-blue-gray;
+    line-height: 40px;
+    color: $base-white;
   }
 }

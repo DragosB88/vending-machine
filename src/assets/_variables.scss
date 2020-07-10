@@ -18,6 +18,8 @@ $aqua-blue: #9cd3db;
 $base-white: #fff;
 $light-white: #ece1c3;
 $base-blue-gray: #063940;
+$background-grey: #808080;
+
 // default values
 $default-radius: 20px;
 
@@ -74,4 +76,12 @@ $btn-grey-active: #bbbcbe;
   100% {
     opacity: 1;
   }
+}
+
+// the hated blink
+.blink {
+  -webkit-animation: blink 1s steps(1) infinite;
+  -moz-animation: blink 1s steps(1) infinite;
+  -o-animation: blink 1s steps(1) infinite;
+  animation: blink 1s steps(1) infinite;
 }

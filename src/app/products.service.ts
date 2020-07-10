@@ -7,6 +7,7 @@ import { FoodItemsService } from './types';
 export class ProductsService {
   constructor() {}
   vendingSlots: any[] = [];
+  // TODO: implement with Firebase
   // max item qty = 20
   foodItems: FoodItemsService[] = [
     {
