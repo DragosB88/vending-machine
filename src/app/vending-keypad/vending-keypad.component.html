@@ -1,9 +1,9 @@
 <div class="vending-keypad-container">
   <div class="pad-row">
     <div class="pad-row__display-box">
-      <label class="invalid-code blink" *ngIf="!isCodeValid"
-        >Invalid code</label
-      >
+      <label class="invalid-code blink" *ngIf="!isCodeValid">{{
+        invalidText
+      }}</label>
       <input
         [style.visibility]="isCodeValid ? 'visible' : 'hidden'"
         class="pad-screen order-screen"

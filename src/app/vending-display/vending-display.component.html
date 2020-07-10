@@ -20,10 +20,13 @@
       </div>
     </div>
     <div class="product-code-slot">
-      <div class="product-code-slot__screen">0</div>
+      <div class="product-code-slot__screen">{{ displayedCode }}</div>
       &#9783;&#9783;&#9783;
     </div>
     <div class="outlet"></div>
   </div>
-  <vending-keypad (changeQuantity)="receiveMessage($event)"></vending-keypad>
+  <vending-keypad
+    (changeQuantity)="receiveQChange($event)"
+    (updateCode)="receiveCode($event)"
+  ></vending-keypad>
 </div>

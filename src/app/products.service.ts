@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
+import { FoodItemsService } from './types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
   constructor() {}
-  vendingSlots = [];
+  vendingSlots: any[] = [];
   // max item qty = 20
-  foodItems = [
+  foodItems: FoodItemsService[] = [
     {
       name: 'Snickers',
       alias: 'Snickers',
       prodClass: 'prod-snickers',
       id: 0,
-      qty: 19,
+      qty: 11,
       price: 2,
     },
     {
@@ -122,7 +123,6 @@ export class ProductsService {
 
     // make sure that the number of items displayed is not bigger than the available vending machine slots
     this.checkNumberOfItems(this.vendingSlots);
-    console.log('final array ', this.vendingSlots);
     return this.vendingSlots;
   }
 

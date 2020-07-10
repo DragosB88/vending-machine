@@ -8,24 +8,27 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class VendingKeypadComponent implements OnInit {
   // credit;
-  buttons;
-  displayedProducts = [];
-  initialized;
+  buttons: any[];
+  displayedProducts: any[] = [];
+  initialized: boolean;
+  isSlotPopulated: boolean;
 
-  result;
-  previousItem;
-  isCodeValid;
+  invalidText: string;
+  result: string;
+  previousItem: string;
+  isCodeValid: boolean;
   @Output() changeQuantity = new EventEmitter();
-
-  public data: any = [];
+  @Output() updateCode = new EventEmitter();
   constructor(ProductsService: ProductsService) {
     // this.credit = '0';
 
     this.initialized = false;
     this.isCodeValid = true;
+    this.isSlotPopulated = true;
     this.result = '0';
 
     this.previousItem = '';
+    this.invalidText = '';
 
     this.buttons = [
       'AC',
@@ -60,9 +63,11 @@ export class VendingKeypadComponent implements OnInit {
         this.initialized = false;
       }
     } else {
-      if (this.typeCode(item, this.result, this.initialized) < 100)
+      if (this.typeCode(item, this.result, this.initialized) < 100) {
         this.result = this.typeCode(item, this.result, this.initialized);
+      }
     }
+    this.updateCode.emit(this.result);
   }
 
   clearEntry(res, prev) {
@@ -93,12 +98,14 @@ export class VendingKeypadComponent implements OnInit {
   evaluateOrder(itemCode) {
     if (parseInt(itemCode) > 9 && parseInt(itemCode) < 30) {
       // revert to original index
-      itemCode = itemCode - 10;
-      let rObj = this.displayedProducts.map((obj, index) => {
-        if (index === itemCode && obj.qty) {
-          obj.qty--;
-        } else if (!obj.qty) {
-          this.invalidCommand();
+      itemCode -= 10;
+      const rObj = this.displayedProducts.map((obj, index) => {
+        if (index === itemCode) {
+          if (obj.qty) {
+            obj.qty--;
+          } else if (obj.qty === 0) {
+            this.slotEmpty();
+          }
         }
         return obj;
       });
@@ -110,6 +117,16 @@ export class VendingKeypadComponent implements OnInit {
   }
 
   invalidCommand() {
+    this.invalidText = 'Invalid code';
+    this.isInvalid();
+  }
+
+  slotEmpty() {
+    this.invalidText = 'Slot empty';
+    this.isInvalid();
+  }
+
+  isInvalid() {
     this.isCodeValid = false;
     setTimeout(() => {
       this.isCodeValid = true;

@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vending-display.component.scss'],
 })
 export class VendingDisplayComponent implements OnInit {
-  products = [];
+  products: any[] = [];
+  message: any[];
+  displayedCode: string = '0';
   constructor(ProductsService: ProductsService) {
     this.products = JSON.parse(sessionStorage.getItem('objectsArray'));
 
@@ -15,9 +17,11 @@ export class VendingDisplayComponent implements OnInit {
       this.products = ProductsService.getProducts();
     }
   }
-  message;
-  receiveMessage($event) {
+  receiveQChange($event) {
     this.products = $event;
+  }
+  receiveCode($event) {
+    this.displayedCode = $event;
   }
   ngOnInit(): void {}
 }
