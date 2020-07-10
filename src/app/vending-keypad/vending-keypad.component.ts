@@ -1,5 +1,6 @@
 import { ProductsService } from './../products.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
 @Component({
   selector: 'vending-keypad',
   templateUrl: './vending-keypad.component.html',
@@ -14,6 +15,9 @@ export class VendingKeypadComponent implements OnInit {
   result;
   previousItem;
   isCodeValid;
+  @Output() changeQuantity = new EventEmitter();
+
+  public data: any = [];
   constructor(ProductsService: ProductsService) {
     // this.credit = '0';
 
@@ -38,24 +42,26 @@ export class VendingKeypadComponent implements OnInit {
       '0',
       'Confirm',
     ];
+    // get products array
     this.displayedProducts = ProductsService.getProducts();
   }
 
   evaluate(item) {
     if (isNaN(item)) {
       // if it is not a number
-      console.log('it is not a number');
       if (item === 'AC') {
         this.result = '0';
         this.initialized = false;
       } else if (item === 'CE') {
         this.result = this.clearEntry(this.result, this.previousItem);
       } else if (item === 'Confirm') {
-        console.log('CONFIRM SIR!');
         this.evaluateOrder(this.result);
+        this.result = '0';
+        this.initialized = false;
       }
     } else {
-      this.result = this.typeCode(item, this.result, this.initialized);
+      if (this.typeCode(item, this.result, this.initialized) < 100)
+        this.result = this.typeCode(item, this.result, this.initialized);
     }
   }
 
@@ -75,7 +81,6 @@ export class VendingKeypadComponent implements OnInit {
 
   typeCode(item, res, init) {
     // if it is a number
-    console.log('it is a number');
     if (res === '0' && !init) {
       res = item;
       init = true;
@@ -89,29 +94,30 @@ export class VendingKeypadComponent implements OnInit {
     if (parseInt(itemCode) > 9 && parseInt(itemCode) < 30) {
       // revert to original index
       itemCode = itemCode - 10;
-      let x = this.displayedProducts.map((obj, index) => {
-        if (index === itemCode) {
+      let rObj = this.displayedProducts.map((obj, index) => {
+        if (index === itemCode && obj.qty) {
           obj.qty--;
+        } else if (!obj.qty) {
+          this.invalidCommand();
         }
         return obj;
       });
-      // debugger;
-      console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ', x);
-      // console.log(
-      //   'array after %%%%%%%%%%%%% ',
-      //   this.displayedProducts.map((obj) => {
-      //     if (obj[itemCode - 10]) {
-      //       obj.qty--;
-      //     }
-      //     return obj;
-      //   })
-      // );
+      this.changeQuantity.emit(rObj);
+      this.saveInSession('objectsArray', rObj);
     } else {
-      this.isCodeValid = false;
-      setTimeout(() => {
-        this.isCodeValid = true;
-      }, 3000);
+      this.invalidCommand();
     }
+  }
+
+  invalidCommand() {
+    this.isCodeValid = false;
+    setTimeout(() => {
+      this.isCodeValid = true;
+    }, 3000);
+  }
+
+  saveInSession(key, val): void {
+    sessionStorage.setItem(key, JSON.stringify(val));
   }
 
   ngOnInit(): void {

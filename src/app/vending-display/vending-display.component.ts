@@ -9,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class VendingDisplayComponent implements OnInit {
   products = [];
   constructor(ProductsService: ProductsService) {
-    this.products = ProductsService.getProducts();
-  }
+    this.products = JSON.parse(sessionStorage.getItem('objectsArray'));
 
+    if (this.products === null) {
+      this.products = ProductsService.getProducts();
+    }
+  }
+  message;
+  receiveMessage($event) {
+    this.products = $event;
+  }
   ngOnInit(): void {}
 }

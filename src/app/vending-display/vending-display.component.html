@@ -9,12 +9,12 @@
           class="vending-item-container__item default-item-class"
           [ngClass]="item.prodClass"
         >
-          <span class="vending-item-container__item--rotate">{{
+          <span *ngIf="item.qty" class="vending-item-container__item--rotate">{{
             item.alias
           }}</span>
           <!-- <span class="container__item--qty">{{ item.qty }}</span> -->
-          <span class="vending-item-container__code"
-            >Id {{ i + 10 }} | {{ item.price }} Ron</span
+          <label class="vending-item-container__code"
+            >Id {{ i + 10 }} | {{ item.price }} Ron</label
           >
         </div>
       </div>
@@ -25,5 +25,5 @@
     </div>
     <div class="outlet"></div>
   </div>
-  <vending-keypad></vending-keypad>
+  <vending-keypad (changeQuantity)="receiveMessage($event)"></vending-keypad>
 </div>
