@@ -25,6 +25,7 @@
       class="pad-row__button"
       *ngFor="let button of buttons"
       (click)="evaluate(button)"
+      [disabled]="!showData"
     >
       {{ button }}
     </button>

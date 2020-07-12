@@ -1,6 +1,11 @@
 import { ProductsService } from './../products.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
+export interface ErrorCategories {
+  isCodeValid: string;
+  isCreditValid: string;
+}
+
 @Component({
   selector: 'vending-keypad',
   templateUrl: './vending-keypad.component.html',
@@ -19,6 +24,9 @@ export class VendingKeypadComponent implements OnInit {
   previousItem: string;
   isCodeValid: boolean;
   isCreditValid: boolean;
+
+  errorStack: string[];
+  errorCategory: ErrorCategories;
   @Input() topUp: boolean;
   @Output() updateCredit = new EventEmitter();
   @Output() changeQuantity = new EventEmitter();
@@ -31,6 +39,17 @@ export class VendingKeypadComponent implements OnInit {
     this.topUp = false;
     this.showData = true;
     this.result = '0';
+
+    this.errorStack = [
+      'Invalid code',
+      'Slot empty',
+      'Insuficient funds',
+      'Max $99 Credit',
+    ];
+    this.errorCategory = {
+      isCodeValid: 'isCodeValid',
+      isCreditValid: 'isCreditValid',
+    };
 
     this.previousItem = '';
     this.invalidText = '';
@@ -114,7 +133,7 @@ export class VendingKeypadComponent implements OnInit {
       this.updateCredit.emit(this.credit);
       this.saveInSession('credit', this.credit);
     } else {
-      this.exceedAmount();
+      this.errorHandler(this.errorCategory.isCreditValid, this.errorStack[3]);
     }
   }
 
@@ -140,10 +159,16 @@ export class VendingKeypadComponent implements OnInit {
               this.updateCredit.emit(this.credit);
               this.saveInSession('credit', this.credit);
             } else {
-              this.insuficinetFunds();
+              this.errorHandler(
+                this.errorCategory.isCreditValid,
+                this.errorStack[2]
+              );
             }
           } else if (obj.qty === 0) {
-            this.slotEmpty();
+            this.errorHandler(
+              this.errorCategory.isCodeValid,
+              this.errorStack[1]
+            );
           }
         }
         return obj;
@@ -153,46 +178,31 @@ export class VendingKeypadComponent implements OnInit {
       this.changeQuantity.emit(rObj);
       this.saveInSession('objectsArray', rObj);
     } else {
-      this.invalidCommand();
+      this.errorHandler(this.errorCategory.isCodeValid, this.errorStack[0]);
     }
   }
 
-  // Error handling - TODO: refactor area
-  invalidCommand() {
-    this.invalidText = 'Invalid code';
-    this.isProdInvalid();
+  // Error handling
+  errorHandler(errFlag, errText) {
+    this.invalidText = errText;
+    if (errFlag === 'isCodeValid') {
+      this.isCodeValid = false;
+      setTimeout(() => {
+        this.isCodeValid = true;
+      }, 3000);
+    } else if (errFlag === 'isCreditValid') {
+      this.isCreditValid = false;
+      setTimeout(() => {
+        this.isCreditValid = true;
+      }, 3000);
+    }
+    this.errorDelay();
   }
 
-  slotEmpty() {
-    this.invalidText = 'Slot empty';
-    this.isProdInvalid();
-  }
-
-  isProdInvalid() {
+  errorDelay() {
     this.showData = false;
-    this.isCodeValid = false;
     setTimeout(() => {
       this.showData = true;
-      this.isCodeValid = true;
-    }, 3000);
-  }
-
-  insuficinetFunds() {
-    this.invalidText = 'Insuficient funds';
-    this.isCreditInvalid();
-  }
-
-  exceedAmount() {
-    this.invalidText = 'Max $99 Credit';
-    this.isCreditInvalid();
-  }
-
-  isCreditInvalid() {
-    this.showData = false;
-    this.isCreditValid = false;
-    setTimeout(() => {
-      this.showData = true;
-      this.isCreditValid = true;
     }, 3000);
   }
 
