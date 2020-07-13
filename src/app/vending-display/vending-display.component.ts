@@ -20,33 +20,42 @@ export class VendingDisplayComponent implements OnInit {
   showPanel: boolean;
   storedVals: StorageParams;
   constructor(ProductsService: ProductsService) {
-    // Obtain state from session storage - TODO: refactor area - streamline storage check
-    if (sessionStorage.getItem('objectsArray')) {
-      this.products = JSON.parse(sessionStorage.getItem('objectsArray'));
-    } else {
-      this.products = ProductsService.getProducts();
-    }
+    // Obtain state from session storage
+    this.products = this.checkIfStored(
+      sessionStorage.getItem('objectsArray'),
+      this.products,
+      ProductsService.getProducts()
+    );
 
     if (sessionStorage.getItem('show')) {
       this.storedVals = JSON.parse(sessionStorage.getItem('show'));
 
-      if (this.storedVals.addMoney) {
-        this.addMoney = this.storedVals.addMoney;
-      } else {
-        this.addMoney = false;
-      }
+      this.addMoney = this.checkIfStored(
+        this.storedVals.addMoney,
+        this.addMoney,
+        false
+      );
 
-      if (this.storedVals.panel) {
-        this.showPanel = this.storedVals.panel;
-      } else {
-        this.showPanel = false;
-      }
+      this.showPanel = this.checkIfStored(
+        this.storedVals.panel,
+        this.showPanel,
+        false
+      );
 
-      if (sessionStorage.getItem('credit')) {
-        this.creditVal = JSON.parse(sessionStorage.getItem('credit'));
-      } else {
-        this.creditVal = 0;
-      }
+      this.creditVal = this.checkIfStored(
+        sessionStorage.getItem('credit'),
+        this.creditVal,
+        0
+      );
+    }
+  }
+
+  // check if value is stored
+  checkIfStored(storedVal, actualVal, notStored) {
+    if (storedVal) {
+      return (actualVal = JSON.parse(storedVal));
+    } else {
+      return (actualVal = notStored);
     }
   }
 
