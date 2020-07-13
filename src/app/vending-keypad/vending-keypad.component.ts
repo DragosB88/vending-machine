@@ -16,26 +16,28 @@ export class VendingKeypadComponent implements OnInit {
   buttons: any[];
   displayedProducts: any[] = [];
   initialized: boolean;
-  isSlotPopulated: boolean;
-  showData: boolean;
 
-  invalidText: string;
   result: string;
   previousItem: string;
+
+  // error vars
+  invalidText: string;
+  showData: boolean;
   isCodeValid: boolean;
   isCreditValid: boolean;
-
   errorStack: string[];
   errorCategory: ErrorCategories;
+
   @Input() topUp: boolean;
   @Output() updateCredit = new EventEmitter();
   @Output() changeQuantity = new EventEmitter();
   @Output() updateCode = new EventEmitter();
+
   constructor(ProductsService: ProductsService) {
     this.initialized = false;
     this.isCodeValid = true;
     this.isCreditValid = true;
-    this.isSlotPopulated = true;
+
     this.topUp = false;
     this.showData = true;
     this.result = '0';
@@ -103,7 +105,7 @@ export class VendingKeypadComponent implements OnInit {
   }
 
   clearEntry(res, prev) {
-    if (prev != 'Confirm') {
+    if (prev !== 'Confirm') {
       if (res.length > 1) {
         res = res.slice(0, -1);
       } else {
@@ -147,8 +149,6 @@ export class VendingKeypadComponent implements OnInit {
       // revert to original index
       itemCode -= 10;
 
-      // TODO: refactor this area
-      // ===================================================
       const rObj = this.displayedProducts.map((obj, index) => {
         if (index === itemCode) {
           if (obj.qty) {
@@ -159,12 +159,14 @@ export class VendingKeypadComponent implements OnInit {
               this.updateCredit.emit(this.credit);
               this.saveInSession('credit', this.credit);
             } else {
+              // display error
               this.errorHandler(
                 this.errorCategory.isCreditValid,
                 this.errorStack[2]
               );
             }
           } else if (obj.qty === 0) {
+            // display error
             this.errorHandler(
               this.errorCategory.isCodeValid,
               this.errorStack[1]
@@ -173,7 +175,6 @@ export class VendingKeypadComponent implements OnInit {
         }
         return obj;
       });
-      // ===================================================
 
       this.changeQuantity.emit(rObj);
       this.saveInSession('objectsArray', rObj);

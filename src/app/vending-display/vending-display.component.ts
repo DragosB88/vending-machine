@@ -19,8 +19,9 @@ export class VendingDisplayComponent implements OnInit {
   creditVal: number = 0;
   showPanel: boolean;
   storedVals: StorageParams;
+
   constructor(ProductsService: ProductsService) {
-    // Obtain state from session storage
+    // obtain state from session storage
     this.products = this.checkIfStored(
       sessionStorage.getItem('objectsArray'),
       this.products,
