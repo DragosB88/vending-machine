@@ -1,6 +1,7 @@
 <div class="hallway">
   <div class="vending-large-container">
     <div class="vending-machine">
+      <!-- Actual displayed products -->
       <div
         class="vending-item-container"
         *ngFor="let item of products; index as i"
@@ -12,13 +13,14 @@
           <span *ngIf="item.qty" class="vending-item-container__item--rotate">{{
             item.alias
           }}</span>
-          <!-- <span class="container__item--qty">{{ item.qty }}</span> -->
           <label class="vending-item-container__code"
             >Id {{ i + 10 }} | $ {{ item.price }}
           </label>
         </div>
       </div>
     </div>
+
+    <!-- Switch area between product selection and credit topup -->
     <div class="product-code-slot" (click)="toggleScreens(false)">
       <div class="product-code-slot-container">
         <div class="product-code-slot__screen-order" [class.blink]="!showPanel">
@@ -40,6 +42,8 @@
     </div>
     <div class="outlet"></div>
   </div>
+
+  <!-- Added here keypad component which incorporated both product selection and credit topup -->
   <vending-keypad
     *ngIf="showPanel"
     [topUp]="addMoney"
