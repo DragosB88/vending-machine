@@ -80,11 +80,9 @@ export class VendingKeypadComponent implements OnInit, VendindKeypad {
     // get products array
     this.displayedProducts = ProductsService.getProducts();
 
-    if (sessionStorage.getItem('credit')) {
-      this.credit = JSON.parse(sessionStorage.getItem('credit'));
-    } else {
-      this.credit = 0;
-    }
+    this.credit = sessionStorage.getItem('credit')
+      ? JSON.parse(sessionStorage.getItem('credit'))
+      : (this.credit = 0);
   }
 
   evaluate(item) {
@@ -97,11 +95,10 @@ export class VendingKeypadComponent implements OnInit, VendindKeypad {
       } else if (item === 'Confirm') {
         if (!this.topUp) {
           this.evaluateOrder(this.result);
-          this.reset();
         } else {
           this.addCredit(this.result);
-          this.reset();
         }
+        this.reset();
       }
     } else if (this.typeCode(item, this.result, this.initialized) < 100) {
       this.result = this.typeCode(item, this.result, this.initialized);

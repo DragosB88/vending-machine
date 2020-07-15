@@ -53,11 +53,7 @@ export class VendingDisplayComponent implements OnInit {
 
   // check if value is stored
   checkIfStored(storedVal, actualVal, notStored) {
-    if (storedVal) {
-      return (actualVal = JSON.parse(storedVal));
-    } else {
-      return (actualVal = notStored);
-    }
+    return (actualVal = storedVal ? JSON.parse(storedVal) : notStored);
   }
 
   toggleScreens(val) {
