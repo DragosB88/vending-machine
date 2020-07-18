@@ -1,3 +1,7 @@
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 
@@ -11,7 +15,12 @@ import { VendingKeypadComponent } from './vending-keypad/vending-keypad.componen
 })
 @NgModule({
   declarations: [AppComponent, VendingDisplayComponent, VendingKeypadComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

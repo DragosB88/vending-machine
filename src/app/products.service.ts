@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FoodItemsService } from './types';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  constructor() {}
+  constructor(private firestore: AngularFirestore) {
+    // uncomment to set products (first time) TODO: check if db is empty
+    // this.setDBProducts(this.foodItems);
+  }
   vendingSlots: any[] = [];
   // TODO: implement with Firebase
   // max item qty = 20
@@ -107,6 +114,39 @@ export class ProductsService {
       price: 3,
     },
   ];
+
+  // productCat = this.firestore.collection('vendingProducts').doc('products');
+
+  // GET FIRESTORE PRODUCTS
+  setDBProducts(data) {
+    // this.firestore
+    //   .collection('vendingProducts') // collection name on Cloud Firestore
+    //   .add(Object.assign({}, data)); // it only accepts objects, thus arrays must be converted
+    this.firestore
+      .collection('vendingProducts')
+      .doc('products')
+      .set(Object.assign({}, data));
+  }
+
+  // GET FIRESTORE PRODUCTS
+  getDBProducts() {
+    return this.firestore.collection('vendingProducts').doc('products').get();
+
+    // return this.firestore
+    //   .doc('vendingProducts/1UPkj6su0EScAKKUgHuL')
+    //   .valueChanges();
+    // return this.firestore.collection('vendingProducts').snapshotChanges();
+    // you can use either:
+    // .valueChanges()
+    // or .snapshotChanges()
+    // return this.firestore.collection('vendingProducts').snapshotChanges();
+
+    // you can either use:
+    // .valueChanges()
+    // .snapshotChanges()
+    // .stateChanges()
+    // or .auditTrail()
+  }
 
   getProducts() {
     // insert items into vending machine
