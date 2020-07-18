@@ -117,7 +117,7 @@ export class ProductsService {
 
   // productCat = this.firestore.collection('vendingProducts').doc('products');
 
-  // GET FIRESTORE PRODUCTS
+  // SET FIRESTORE PRODUCTS
   setDBProducts(data) {
     // this.firestore
     //   .collection('vendingProducts') // collection name on Cloud Firestore
