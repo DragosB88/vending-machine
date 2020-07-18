@@ -20,6 +20,8 @@ export class VendingDisplayComponent implements OnInit {
   showPanel: boolean;
   storedVals: StorageParams;
 
+  dbProducts: any;
+
   constructor(ProductsService: ProductsService) {
     // obtain state from session storage
     this.products = this.checkIfStored(
@@ -27,6 +29,12 @@ export class VendingDisplayComponent implements OnInit {
       this.products,
       ProductsService.getProducts()
     );
+    // OBTAIN PRODUCTS FROM FIREBASE
+    this.dbProducts = ProductsService.getDBProducts().subscribe(
+      (res) => (this.dbProducts = res)
+    );
+    // this.dbProducts = ProductsService.getDBProducts();
+    console.log('DATABASE PRODUCTS: ', this.dbProducts);
 
     if (sessionStorage.getItem('show')) {
       this.storedVals = JSON.parse(sessionStorage.getItem('show'));
