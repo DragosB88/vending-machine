@@ -30,11 +30,11 @@ export class VendingDisplayComponent implements OnInit {
       ProductsService.getProducts()
     );
     // OBTAIN PRODUCTS FROM FIREBASE
-    this.dbProducts = ProductsService.getDBProducts().subscribe(
-      (res) => (this.dbProducts = res)
-    );
+    this.dbProducts = ProductsService.getDBProducts().subscribe((res) => {
+      this.dbProducts = res;
+      console.log('DATABASE PRODUCTS: ', this.dbProducts);
+    });
     // this.dbProducts = ProductsService.getDBProducts();
-    console.log('DATABASE PRODUCTS: ', this.dbProducts);
 
     if (sessionStorage.getItem('show')) {
       this.storedVals = JSON.parse(sessionStorage.getItem('show'));

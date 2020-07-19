@@ -119,13 +119,10 @@ export class ProductsService {
 
   // SET FIRESTORE PRODUCTS
   setDBProducts(data) {
-    // this.firestore
-    //   .collection('vendingProducts') // collection name on Cloud Firestore
-    //   .add(Object.assign({}, data)); // it only accepts objects, thus arrays must be converted
     this.firestore
-      .collection('vendingProducts')
-      .doc('products')
-      .set(Object.assign({}, data));
+      .collection('vendingProducts') // collection name on Cloud Firestore
+      .doc('products') // document name on Cloud Firestore
+      .set(Object.assign({}, data)); // it only accepts objects, thus arrays must be converted
   }
 
   // GET FIRESTORE PRODUCTS
