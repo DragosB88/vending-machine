@@ -7,8 +7,7 @@ It doesn't use Redux (for now)
 Steps for setting it up:
 
 - install node
-- npm install
-- npm install -g @angular/cli
+- npm install @angular/cli
 - ng serve ---> start server
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
